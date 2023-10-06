@@ -44,3 +44,23 @@ export const getCourse = async (req, res) => {
     res.status(404).json({ error: e.message })
   }
 }
+
+export const updateCourse = async (req, res) => {
+  try {
+    const { id } = req.params
+    const course = await Course.findByIdAndUpdate(id, req.body, { new: true })
+    res.send(course)
+  } catch (e) {
+    res.status(424).json({ error: e.message })
+  }
+}
+
+export const deleteCourse = async (req, res) => {
+  try {
+    const { id } = req.params
+    const course = await Course.findByIdAndDelete(id)
+    res.send(course)
+  } catch (e) {
+    res.status(424).json({ error: e.message })
+  }
+}
