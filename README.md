@@ -1,4 +1,4 @@
-![Planning]()
+![Planning](images/header.png)
 
 ### Date: October 6, 2023
 
