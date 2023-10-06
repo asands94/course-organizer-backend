@@ -10,7 +10,7 @@
 
 ### **_Description_**
 
-##### This is the backend of an application that keeps all the courses you're taking in spot, so you can keep track of the many things you've signed up for.
+##### This is the backend of an application that keeps all the courses you're taking in one spot, so you can keep track of the many things you've signed up for.
 
 ##### The frontend repository can be viewed [here]().
 
