@@ -12,7 +12,7 @@
 
 ##### This is the backend of an application that keeps all the courses you're taking in one spot, so you can keep track of the many things you've signed up for.
 
-##### The frontend repository can be viewed [here]().
+##### The frontend repository can be viewed [here](https://github.com/asands94/course-organizer-frontend).
 
 ---
 
