@@ -4,7 +4,6 @@ import 'dotenv/config'
 const localdb = 'mongodb://127.0.0.1:27017/organizerDatabase'
 
 const MONGODB_URI = process.env.MONGODB_URI
-console.log(process.env.DEPLOYED)
 
 const currentDB = process.env.DEPLOYED === 'no' ? localdb : MONGODB_URI
 
