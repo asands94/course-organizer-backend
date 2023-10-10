@@ -23,7 +23,7 @@ export const createCourse = async (req, res) => {
 
 export const getCourses = async (req, res) => {
   try {
-    const courses = await Course.find()
+    const courses = await Course.find({ user: req.user })
     res.json(courses)
   } catch (e) {
     res.status(404).json({ error: e.message })
@@ -34,8 +34,7 @@ export const getCourse = async (req, res) => {
   try {
     const { id } = req.params
     const course = await Course.findById(id)
-
-    if (course) {
+    if (course.user._id == req.user) {
       res.json(course)
     } else {
       res.status(404).json({ error: 'Course Not Found' })
