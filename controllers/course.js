@@ -24,7 +24,7 @@ export const createCourse = async (req, res) => {
 
 export const getCourses = async (req, res) => {
   try {
-    const courses = await Course.find({ user: req.user })
+    const courses = await Course.find({ user: req.user }).populate('tags')
     res.json(courses)
   } catch (e) {
     res.status(404).json({ error: e.message })
@@ -34,8 +34,8 @@ export const getCourses = async (req, res) => {
 export const getCourse = async (req, res) => {
   try {
     const { id } = req.params
-    const course = await Course.findById(id)
-
+    const course = await Course.findById(id).populate('tags')
+    console.log(course)
     if (course.user._id == req.user) {
       res.json(course)
     } else {
@@ -76,6 +76,24 @@ export const addTagToCourse = async (req, res) => {
     course.save()
 
     tag.courses.push(course)
+    tag.save()
+
+    res.send(course)
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+}
+
+export const removeTagFromCourse = async (req, res) => {
+  try {
+    const { courseId, tagId } = req.params
+    const course = await Course.findById(courseId)
+    const tag = await Tag.findById(tagId)
+
+    course.tags.remove(tag)
+    course.save()
+
+    tag.courses.remove(course)
     tag.save()
 
     res.send(course)
