@@ -1,4 +1,5 @@
 import Course from '../models/course.js'
+import Tag from '../models/tag.js'
 import User from '../models/user.js'
 
 export const createCourse = async (req, res) => {
@@ -62,5 +63,23 @@ export const deleteCourse = async (req, res) => {
     res.send(course)
   } catch (e) {
     res.status(424).json({ error: e.message })
+  }
+}
+
+export const addTagToCourse = async (req, res) => {
+  try {
+    const { courseId, tagId } = req.params
+    const course = await Course.findById(courseId)
+    const tag = await Tag.findById(tagId)
+
+    course.tags.push(tag)
+    course.save()
+
+    tag.courses.push(course)
+    tag.save()
+
+    res.send(course)
+  } catch (e) {
+    res.status(500).json({ error: e.message })
   }
 }
