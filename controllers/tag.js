@@ -23,7 +23,7 @@ export const createTag = async (req, res) => {
 
 export const getTags = async (req, res) => {
   try {
-    const tags = await Tag.find()
+    const tags = await Tag.find({ user: req.user })
     res.json(tags)
   } catch (e) {
     res.status(404).json({ error: e.message })
@@ -35,7 +35,7 @@ export const getTag = async (req, res) => {
     const { id } = req.params
     const tag = await Tag.findById(id)
 
-    if (tag) {
+    if (tag.user._id == req.user) {
       res.json(tag)
     } else {
       res.status(404).json({ error: 'Tag Not Found' })

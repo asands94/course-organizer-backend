@@ -34,6 +34,7 @@ export const getCourse = async (req, res) => {
   try {
     const { id } = req.params
     const course = await Course.findById(id)
+
     if (course.user._id == req.user) {
       res.json(course)
     } else {
